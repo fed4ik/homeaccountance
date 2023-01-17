@@ -24,6 +24,10 @@ public class HealthController {
     @GetMapping("/user/{userId}")
     User getUserList(@PathVariable UUID userId) {
 
+        return getUser(userId);
+    }
+
+    private User getUser(UUID userId) {
         return users.stream()
                 .filter(user -> userId.equals(user.getId()))
                 .findAny().get();
@@ -38,7 +42,7 @@ public class HealthController {
         return user.getId();
     }
 
-    @PutMapping("/editUser")
+    @PutMapping("/user")
     UUID modifyUser(@RequestBody User user) {
 
         users.remove(user);
@@ -47,10 +51,10 @@ public class HealthController {
         return user.getId();
     }
 
-    @DeleteMapping("/deleteUser")
-    void deleteUser(@RequestBody User user) {
-
-        users.remove(user);
+    @DeleteMapping("/user/{userId}")
+    boolean deleteUserList(@PathVariable UUID userId) {
+        users.remove(getUser(userId));
+        return true;
     }
 
 }
