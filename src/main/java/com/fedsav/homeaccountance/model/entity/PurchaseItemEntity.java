@@ -1,16 +1,18 @@
 package com.fedsav.homeaccountance.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
+@Table(name = "PURCHASES")
 public class PurchaseItemEntity {
     @Id
-    private UUID id;
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String id;
     @Column(name = "purchase_date")
     private LocalDateTime dateTime;
     @Column(name = "item_name")
@@ -27,11 +29,11 @@ public class PurchaseItemEntity {
         this.cost = cost;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
