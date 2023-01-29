@@ -46,6 +46,10 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
         return null;
     }
 
+    @Override
+    public PurchaseItemDto getPurchaseItem(String id) {
+        return null;
+    }
 
     @Override
     public void editPurchaseItem(PurchaseItemDto dto) {
@@ -53,7 +57,7 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
     }
 
     @Override
-    public void removePurchaseItem(UUID id) {
+    public void removePurchaseItem(String id) {
 
     }
 }

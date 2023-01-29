@@ -8,9 +8,10 @@ import java.util.UUID;
 
 public interface PurchaseItemService {
     List<PurchaseItemDto> getPurchaseItemList();
+    PurchaseItemDto getPurchaseItem(String id);
     List<PurchaseItemDto> getPurchaseItemListDateRange(LocalDateTime startDate, LocalDateTime endDate);
     String createPurchaseItem(PurchaseItemDto dto);
     void editPurchaseItem(PurchaseItemDto dto);
-    void removePurchaseItem(UUID id);
+    void removePurchaseItem(String id);
 
 }
