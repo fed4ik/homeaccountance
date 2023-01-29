@@ -13,14 +13,10 @@
             <column name="id" type="uuid"  autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" primaryKeyName="purchases_id_pk" />
             </column>
-            <column name="uuid" type="uuid" />
             <column name="purchase_date" type="datetime" />
             <column name="item_name" type="varchar(100)" />
             <column name="cost" type="bigint" />
         </createTable>
     </changeSet>
-    <changeSet id="202010211811" author="Oleksandr Fedchyk">
 
-
-    </changeSet>
 </databaseChangeLog>

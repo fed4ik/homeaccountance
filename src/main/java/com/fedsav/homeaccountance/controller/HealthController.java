@@ -12,7 +12,7 @@ public class HealthController {
     private Set<User> users = new HashSet<>();
 
     @GetMapping("/health")
-    String getHealthStatus(){
+    String getHealthStatus() {
         return "Ok";
     }
 
@@ -58,6 +58,7 @@ public class HealthController {
     }
 
 }
+
 class User {
     private UUID id;
     private String name;
