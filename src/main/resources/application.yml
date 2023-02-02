@@ -1,4 +1,6 @@
-
+server:
+  servlet:
+    context-path: /homeaccountance
 spring:
   h2:
     console:

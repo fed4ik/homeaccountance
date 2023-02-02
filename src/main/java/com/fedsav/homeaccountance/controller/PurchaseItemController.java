@@ -11,13 +11,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
+@RequestMapping("purchases")
 public class PurchaseItemController {
 
     @Autowired
     private PurchaseItemService service;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/purchases")
+    @GetMapping
     public List<PurchaseItemDto> getAllPurchases(@RequestParam(required = false)
                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
                                                      LocalDateTime startDate,
@@ -32,17 +33,17 @@ public class PurchaseItemController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/purchase")
+    @PostMapping
     public String createPurchaseItem(@RequestBody PurchaseItemDto dto) {
         return service.createPurchaseItem(dto);
     }
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/purchase/{id}")
+    @DeleteMapping("{id}")
     public void deletePurchaseItem(@PathVariable String id) {
         service.removePurchaseItem(id);
     }
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/purchase")
+    @PutMapping
     public void editPurchaseItem(@RequestBody PurchaseItemDto dto){
         service.editPurchaseItem(dto);
     }
