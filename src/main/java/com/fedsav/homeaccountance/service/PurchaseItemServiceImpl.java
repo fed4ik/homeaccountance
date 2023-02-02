@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
-
 @Service
 public class PurchaseItemServiceImpl implements PurchaseItemService {
 
@@ -24,7 +22,7 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
 
         List<PurchaseItemDto> itemDtoList = new LinkedList<>();
 
-        for (PurchaseItemEntity entity: purchaseItemEntityList) {
+        for (PurchaseItemEntity entity : purchaseItemEntityList) {
             PurchaseItemDto itemDto = new PurchaseItemDto(entity.getId(), entity.getName(), entity.getDateTime(), entity.getCost());
             itemDtoList.add(itemDto);
         }
@@ -43,21 +41,36 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
 
     @Override
     public List<PurchaseItemDto> getPurchaseItemListDateRange(LocalDateTime startDate, LocalDateTime endDate) {
-        return null;
+
+        List<PurchaseItemEntity> purchaseItemEntityList = repository.findAllByDateTimeBetween(startDate, endDate);
+
+        List<PurchaseItemDto> itemDtoList = new LinkedList<>();
+
+        for (PurchaseItemEntity entity : purchaseItemEntityList) {
+            PurchaseItemDto itemDto = new PurchaseItemDto(entity.getId(), entity.getName(), entity.getDateTime(), entity.getCost());
+            itemDtoList.add(itemDto);
+        }
+
+        return itemDtoList;
     }
 
     @Override
     public PurchaseItemDto getPurchaseItem(String id) {
-        return null;
+
+        PurchaseItemEntity purchaseItemEntity = repository.findById(id).get();
+        PurchaseItemDto purchaseItemDto = new PurchaseItemDto(purchaseItemEntity.getId(), purchaseItemEntity.getName(), purchaseItemEntity.getDateTime(), purchaseItemEntity.getCost());
+
+        return purchaseItemDto;
     }
 
     @Override
     public void editPurchaseItem(PurchaseItemDto dto) {
-
+        PurchaseItemEntity purchaseItemEntity = new PurchaseItemEntity(dto.getId(), dto.getDateTime(), dto.getPurchaseItemName(), dto.getCost());
+        repository.save(purchaseItemEntity);
     }
 
     @Override
     public void removePurchaseItem(String id) {
-
+        repository.deleteById(id);
     }
 }

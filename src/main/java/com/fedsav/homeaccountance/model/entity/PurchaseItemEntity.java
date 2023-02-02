@@ -29,6 +29,13 @@ public class PurchaseItemEntity {
         this.cost = cost;
     }
 
+    public PurchaseItemEntity(String id, LocalDateTime dateTime, String name, long cost) {
+        this.id = id;
+        this.dateTime = dateTime;
+        this.name = name;
+        this.cost = cost;
+    }
+
     public String getId() {
         return id;
     }
