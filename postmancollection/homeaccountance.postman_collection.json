@@ -175,6 +175,14 @@
 						"url": "localhost:8080/homeaccountance/purchases"
 					},
 					"response": []
+				},
+				{
+					"name": "get purchaseByID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		}
