@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,9 +33,16 @@ public class PurchaseItemController {
         return service.getPurchaseItemList();
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("{id}")
+    public PurchaseItemDto getPurchaseItem(@PathVariable String id) {
+        return service.getPurchaseItem(id);
+    }
+
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public String createPurchaseItem(@RequestBody PurchaseItemDto dto) {
+    public String createPurchaseItem(@Valid @RequestBody PurchaseItemDto dto) {
         return service.createPurchaseItem(dto);
     }
     @ResponseStatus(HttpStatus.OK)
@@ -44,7 +52,7 @@ public class PurchaseItemController {
     }
     @ResponseStatus(HttpStatus.OK)
     @PutMapping
-    public void editPurchaseItem(@RequestBody PurchaseItemDto dto){
+    public void editPurchaseItem(@Valid @RequestBody PurchaseItemDto dto){
         service.editPurchaseItem(dto);
     }
 }

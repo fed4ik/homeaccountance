@@ -4,8 +4,10 @@ import com.fedsav.homeaccountance.model.dto.PurchaseItemDto;
 import com.fedsav.homeaccountance.model.entity.PurchaseItemEntity;
 import com.fedsav.homeaccountance.repository.PurchaseItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,7 +59,9 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
     @Override
     public PurchaseItemDto getPurchaseItem(String id) {
 
-        PurchaseItemEntity purchaseItemEntity = repository.findById(id).get();
+        PurchaseItemEntity purchaseItemEntity = repository.findById(id)
+                .orElseThrow(() -> new EmptyResultDataAccessException("Purchase Item with id was not found: " + id, 1));
+
         PurchaseItemDto purchaseItemDto = new PurchaseItemDto(purchaseItemEntity.getId(), purchaseItemEntity.getName(), purchaseItemEntity.getDateTime(), purchaseItemEntity.getCost());
 
         return purchaseItemDto;
@@ -71,6 +75,7 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
 
     @Override
     public void removePurchaseItem(String id) {
+
         repository.deleteById(id);
     }
 }
