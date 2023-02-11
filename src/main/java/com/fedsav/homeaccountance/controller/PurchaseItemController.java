@@ -2,7 +2,7 @@ package com.fedsav.homeaccountance.controller;
 
 import com.fedsav.homeaccountance.model.dto.PurchaseItemDto;
 import com.fedsav.homeaccountance.service.PurchaseItemService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("purchases")
+@AllArgsConstructor
 public class PurchaseItemController {
 
-    @Autowired
-    private PurchaseItemService service;
+    private final PurchaseItemService service;
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
