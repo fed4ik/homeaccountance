@@ -18,7 +18,7 @@ public class PurchaseItemDto {
     String id;
     @Size(min=3, max = 100)
     @NotEmpty
-    String purchaseItemName;
+    String name;
     LocalDateTime dateTime;
     @Min(0)
     @NotNull
@@ -27,7 +27,7 @@ public class PurchaseItemDto {
     public static PurchaseItemDto ofEntity(PurchaseItemEntity purchaseItemEntity) {
         return PurchaseItemDto.builder()
                 .id(purchaseItemEntity.getId())
-                .purchaseItemName(purchaseItemEntity.getName())
+                .name(purchaseItemEntity.getName())
                 .cost(purchaseItemEntity.getCost())
                 .dateTime(purchaseItemEntity.getDateTime())
                 .build();

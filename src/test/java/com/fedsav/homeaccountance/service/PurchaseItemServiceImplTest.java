@@ -43,7 +43,8 @@ class PurchaseItemServiceImplTest {
         when(repository.save(purchaseItemEntity)).thenReturn(purchaseItemSavedEntity);
 
         //then
-        assertThat(purchaseItemServiceImpl.createPurchaseItem(PurchaseItemDto.ofEntity(purchaseItemEntity)), equalTo(TEST_ID));
+        assertThat(purchaseItemServiceImpl.createPurchaseItem(PurchaseItemDto.ofEntity(purchaseItemEntity)),
+                equalTo(TEST_ID));
     }
 
 }

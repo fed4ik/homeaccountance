@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f3680618-5505-4f74-8fe6-9fe8e13ca16a",
+		"_postman_id": "f2cf5eae-923b-4e8b-a9d0-fc6fddb79481",
 		"name": "homeaccountance",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2894879"
 	},
 	"item": [
 		{
@@ -22,7 +23,16 @@
 								}
 							}
 						},
-						"url": "localhost:8080/user"
+						"url": {
+							"raw": "localhost:8080/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
 					},
 					"response": []
 				},
@@ -31,7 +41,16 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "localhost:8080/users"
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
 					},
 					"response": []
 				},
@@ -74,7 +93,16 @@
 								}
 							}
 						},
-						"url": "localhost:8080/user"
+						"url": {
+							"raw": "localhost:8080/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
 					},
 					"response": []
 				}
@@ -128,7 +156,17 @@
 								}
 							}
 						},
-						"url": "localhost:8080/homeaccountance/purchases"
+						"url": {
+							"raw": "localhost:8080/homeaccountance/purchases",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"homeaccountance",
+								"purchases"
+							]
+						}
 					},
 					"response": []
 				},
@@ -172,7 +210,17 @@
 								}
 							}
 						},
-						"url": "localhost:8080/homeaccountance/purchases"
+						"url": {
+							"raw": "localhost:8080/homeaccountance/purchases",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"homeaccountance",
+								"purchases"
+							]
+						}
 					},
 					"response": []
 				},
@@ -180,7 +228,25 @@
 					"name": "get purchaseByID",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/homeaccountance/purchases/:purchaseitemid",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"homeaccountance",
+								"purchases",
+								":purchaseitemid"
+							],
+							"variable": [
+								{
+									"key": "purchaseitemid",
+									"value": "1"
+								}
+							]
+						}
 					},
 					"response": []
 				}

@@ -30,7 +30,7 @@ public class PurchaseItemEntity {
     public static PurchaseItemEntity ofDto(PurchaseItemDto dto) {
         return PurchaseItemEntity.builder()
                 .id(dto.getId())
-                .name(dto.getPurchaseItemName())
+                .name(dto.getName())
                 .cost(dto.getCost())
                 .dateTime(dto.getDateTime())
                 .build();

@@ -14,11 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("purchases")
 @AllArgsConstructor
+@ResponseStatus(HttpStatus.OK)
 public class PurchaseItemController {
 
     private final PurchaseItemService service;
 
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public List<PurchaseItemDto> getAllPurchases(@RequestParam(required = false)
                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -33,7 +33,6 @@ public class PurchaseItemController {
         return service.getPurchaseItemList();
     }
 
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping("{id}")
     public PurchaseItemDto getPurchaseItem(@PathVariable String id) {
         return service.getPurchaseItem(id);
@@ -45,12 +44,11 @@ public class PurchaseItemController {
     public String createPurchaseItem(@Valid @RequestBody PurchaseItemDto dto) {
         return service.createPurchaseItem(dto);
     }
-    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("{id}")
     public void deletePurchaseItem(@PathVariable String id) {
         service.removePurchaseItem(id);
     }
-    @ResponseStatus(HttpStatus.OK)
+
     @PutMapping
     public void editPurchaseItem(@Valid @RequestBody PurchaseItemDto dto){
         service.editPurchaseItem(dto);
