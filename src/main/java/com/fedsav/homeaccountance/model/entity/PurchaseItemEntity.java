@@ -1,17 +1,24 @@
 package com.fedsav.homeaccountance.model.entity;
 
+import com.fedsav.homeaccountance.model.dto.PurchaseItemDto;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
 @Table(name = "PURCHASES")
+@Builder
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 public class PurchaseItemEntity {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @EqualsAndHashCode.Include
     private String id;
     @Column(name = "purchase_date")
     private LocalDateTime dateTime;
@@ -20,64 +27,12 @@ public class PurchaseItemEntity {
     @Column(name = "cost")
     private long cost;
 
-    public PurchaseItemEntity() {
-    }
-
-    public PurchaseItemEntity(LocalDateTime dateTime, String name, long cost) {
-        this.dateTime = dateTime;
-        this.name = name;
-        this.cost = cost;
-    }
-
-    public PurchaseItemEntity(String id, LocalDateTime dateTime, String name, long cost) {
-        this.id = id;
-        this.dateTime = dateTime;
-        this.name = name;
-        this.cost = cost;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getCost() {
-        return cost;
-    }
-
-    public void setCost(long cost) {
-        this.cost = cost;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PurchaseItemEntity that = (PurchaseItemEntity) o;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public static PurchaseItemEntity ofDto(PurchaseItemDto dto) {
+        return PurchaseItemEntity.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .cost(dto.getCost())
+                .dateTime(dto.getDateTime())
+                .build();
     }
 }

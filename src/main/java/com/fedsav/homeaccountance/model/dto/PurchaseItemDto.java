@@ -1,5 +1,7 @@
 package com.fedsav.homeaccountance.model.dto;
 
+import com.fedsav.homeaccountance.model.entity.PurchaseItemEntity;
+import lombok.Builder;
 import lombok.Value;
 
 import javax.validation.constraints.Min;
@@ -10,31 +12,24 @@ import java.time.LocalDateTime;
 
 
 @Value
+@Builder
 public class PurchaseItemDto {
 
-    private String id;
+    String id;
     @Size(min=3, max = 100)
     @NotEmpty
-    private String purchaseItemName;
-    private LocalDateTime dateTime;
+    String name;
+    LocalDateTime dateTime;
     @Min(0)
     @NotNull
-    private Long cost;
+    Long cost;
 
-    public PurchaseItemDto(String id, String purchaseItemName, LocalDateTime dateTime, Long cost) {
-        this.id = id;
-        this.purchaseItemName = purchaseItemName;
-        this.dateTime = dateTime;
-        this.cost = cost;
-    }
-
-    @Override
-    public String toString() {
-        return "PurchaseItemDto{" +
-                "id=" + id +
-                ", purchaseItemName='" + purchaseItemName + '\'' +
-                ", dateTime=" + dateTime +
-                ", cost=" + cost +
-                '}';
+    public static PurchaseItemDto ofEntity(PurchaseItemEntity purchaseItemEntity) {
+        return PurchaseItemDto.builder()
+                .id(purchaseItemEntity.getId())
+                .name(purchaseItemEntity.getName())
+                .cost(purchaseItemEntity.getCost())
+                .dateTime(purchaseItemEntity.getDateTime())
+                .build();
     }
 }

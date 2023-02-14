@@ -3,18 +3,18 @@ package com.fedsav.homeaccountance.service;
 import com.fedsav.homeaccountance.model.dto.PurchaseItemDto;
 import com.fedsav.homeaccountance.model.entity.PurchaseItemEntity;
 import com.fedsav.homeaccountance.repository.PurchaseItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
+@AllArgsConstructor
 public class PurchaseItemServiceImpl implements PurchaseItemService {
 
-    @Autowired
     private PurchaseItemRepository repository;
 
     @Override
@@ -22,20 +22,13 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
 
         List<PurchaseItemEntity> purchaseItemEntityList = repository.findAll();
 
-        List<PurchaseItemDto> itemDtoList = new LinkedList<>();
-
-        for (PurchaseItemEntity entity : purchaseItemEntityList) {
-            PurchaseItemDto itemDto = new PurchaseItemDto(entity.getId(), entity.getName(), entity.getDateTime(), entity.getCost());
-            itemDtoList.add(itemDto);
-        }
-
-        return itemDtoList;
+        return getPurchaseItemDtoList(purchaseItemEntityList);
     }
 
     @Override
     public String createPurchaseItem(PurchaseItemDto dto) {
 
-        PurchaseItemEntity purchaseItemEntity = new PurchaseItemEntity(dto.getDateTime(), dto.getPurchaseItemName(), dto.getCost());
+        PurchaseItemEntity purchaseItemEntity = PurchaseItemEntity.ofDto(dto);
         PurchaseItemEntity purchaseItemEntitySaved = repository.save(purchaseItemEntity);
 
         return purchaseItemEntitySaved.getId();
@@ -46,14 +39,7 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
 
         List<PurchaseItemEntity> purchaseItemEntityList = repository.findAllByDateTimeBetween(startDate, endDate);
 
-        List<PurchaseItemDto> itemDtoList = new LinkedList<>();
-
-        for (PurchaseItemEntity entity : purchaseItemEntityList) {
-            PurchaseItemDto itemDto = new PurchaseItemDto(entity.getId(), entity.getName(), entity.getDateTime(), entity.getCost());
-            itemDtoList.add(itemDto);
-        }
-
-        return itemDtoList;
+        return getPurchaseItemDtoList(purchaseItemEntityList);
     }
 
     @Override
@@ -62,20 +48,26 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
         PurchaseItemEntity purchaseItemEntity = repository.findById(id)
                 .orElseThrow(() -> new EmptyResultDataAccessException("Purchase Item with id was not found: " + id, 1));
 
-        PurchaseItemDto purchaseItemDto = new PurchaseItemDto(purchaseItemEntity.getId(), purchaseItemEntity.getName(), purchaseItemEntity.getDateTime(), purchaseItemEntity.getCost());
-
-        return purchaseItemDto;
+        return PurchaseItemDto.ofEntity(purchaseItemEntity);
     }
 
     @Override
     public void editPurchaseItem(PurchaseItemDto dto) {
-        PurchaseItemEntity purchaseItemEntity = new PurchaseItemEntity(dto.getId(), dto.getDateTime(), dto.getPurchaseItemName(), dto.getCost());
+        PurchaseItemEntity purchaseItemEntity = PurchaseItemEntity.ofDto(dto);
         repository.save(purchaseItemEntity);
     }
 
     @Override
     public void removePurchaseItem(String id) {
-
         repository.deleteById(id);
+    }
+
+
+    private static List<PurchaseItemDto> getPurchaseItemDtoList(List<PurchaseItemEntity> purchaseItemEntityList) {
+
+        return purchaseItemEntityList.stream()
+                .map(PurchaseItemDto::ofEntity)
+                .collect(Collectors.toList());
+
     }
 }
