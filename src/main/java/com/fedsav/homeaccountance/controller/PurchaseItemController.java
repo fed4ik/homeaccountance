@@ -51,6 +51,7 @@ public class PurchaseItemController {
 
     @PutMapping
     public void editPurchaseItem(@Valid @RequestBody PurchaseItemDto dto){
+        service.getPurchaseItem(dto.getId());
         service.editPurchaseItem(dto);
     }
 }
