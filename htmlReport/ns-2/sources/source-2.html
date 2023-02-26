@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > HealthController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fedsav.homeaccountance.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: HealthController (com.fedsav.homeaccountance.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HealthController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (1/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (2/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fedsav.homeaccountance.controller;
+&nbsp;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.UUID;
+&nbsp;
+&nbsp;@RestController
+<b class="fc">&nbsp;public class HealthController {</b>
+<b class="fc">&nbsp;    private Set&lt;User&gt; users = new HashSet&lt;&gt;();</b>
+&nbsp;
+&nbsp;    @GetMapping(&quot;/health&quot;)
+&nbsp;    String getHealthStatus() {
+<b class="nc">&nbsp;        return &quot;Ok&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/users&quot;)
+&nbsp;    Set&lt;User&gt; getUserList() {
+<b class="nc">&nbsp;        return users;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/user/{userId}&quot;)
+&nbsp;    User getUserList(@PathVariable UUID userId) {
+&nbsp;
+<b class="nc">&nbsp;        return getUser(userId);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private User getUser(UUID userId) {
+<b class="nc">&nbsp;        return users.stream()</b>
+<b class="nc">&nbsp;                .filter(user -&gt; userId.equals(user.getId()))</b>
+<b class="nc">&nbsp;                .findAny().get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PostMapping(&quot;/user&quot;)
+&nbsp;    UUID getUserList(@RequestBody User user) {
+&nbsp;
+<b class="nc">&nbsp;        user.setId(UUID.randomUUID());</b>
+<b class="nc">&nbsp;        users.add(user);</b>
+&nbsp;
+<b class="nc">&nbsp;        return user.getId();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PutMapping(&quot;/user&quot;)
+&nbsp;    UUID modifyUser(@RequestBody User user) {
+&nbsp;
+<b class="nc">&nbsp;        users.remove(user);</b>
+<b class="nc">&nbsp;        users.add(user);</b>
+&nbsp;
+<b class="nc">&nbsp;        return user.getId();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @DeleteMapping(&quot;/user/{userId}&quot;)
+&nbsp;    boolean deleteUserList(@PathVariable UUID userId) {
+<b class="nc">&nbsp;        users.remove(getUser(userId));</b>
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;class User {
+&nbsp;    private UUID id;
+&nbsp;    private String name;
+&nbsp;
+&nbsp;    public UUID getId() {
+&nbsp;        return id;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getName() {
+&nbsp;        return name;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setId(UUID id) {
+&nbsp;        this.id = id;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+&nbsp;        if (this == o) return true;
+&nbsp;        if (o == null || getClass() != o.getClass()) return false;
+&nbsp;        User user = (User) o;
+&nbsp;        return id.equals(user.id);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+&nbsp;        return Objects.hash(id);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-28 12:07</div>
+</div>
+</body>
+</html>
