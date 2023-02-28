@@ -3,10 +3,8 @@ package com.fedsav.homeaccountance.service;
 import com.fedsav.homeaccountance.model.dto.PurchaseItemDto;
 import com.fedsav.homeaccountance.model.entity.PurchaseItemEntity;
 import com.fedsav.homeaccountance.repository.PurchaseItemRepository;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.rules.ExpectedException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -18,7 +16,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -51,7 +48,6 @@ class PurchaseItemServiceImplTest {
         PurchaseItemDto purchaseItemDto = PurchaseItemDto.ofEntity(purchaseItemEntity);
 
         //when
-
         String purchaseItem = purchaseItemServiceImpl.createPurchaseItem(purchaseItemDto);
 
         //then
@@ -64,7 +60,6 @@ class PurchaseItemServiceImplTest {
         //given
         final String TEST_ID = "123456";
         final String testEntityName = "testEntity";
-
 
         PurchaseItemEntity purchaseItemReturnedEntity = PurchaseItemEntity.builder()
                 .id(TEST_ID)
