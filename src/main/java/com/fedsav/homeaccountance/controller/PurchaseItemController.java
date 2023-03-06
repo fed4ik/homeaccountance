@@ -5,11 +5,14 @@ import com.fedsav.homeaccountance.service.PurchaseItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("purchases")
@@ -21,12 +24,12 @@ public class PurchaseItemController {
 
     @GetMapping
     public List<PurchaseItemDto> getAllPurchases(@RequestParam(required = false)
-                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-                                                     LocalDateTime startDate,
+                                                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                                 LocalDateTime startDate,
                                                  @RequestParam(required = false)
                                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
                                                  LocalDateTime endDate) {
-        if(startDate != null && endDate != null){
+        if (startDate != null && endDate != null) {
             return service.getPurchaseItemListDateRange(startDate, endDate);
         }
 
@@ -41,16 +44,17 @@ public class PurchaseItemController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public String createPurchaseItem(@Valid @RequestBody PurchaseItemDto dto) {
-        return service.createPurchaseItem(dto);
+    public ResponseEntity<Map<String, String>> createPurchaseItem(@Valid @RequestBody PurchaseItemDto dto) {
+        return ResponseEntity.of(Optional.of(Map.of("id", service.createPurchaseItem(dto))));
     }
+
     @DeleteMapping("{id}")
     public void deletePurchaseItem(@PathVariable String id) {
         service.removePurchaseItem(id);
     }
 
     @PutMapping
-    public void editPurchaseItem(@Valid @RequestBody PurchaseItemDto dto){
+    public void editPurchaseItem(@Valid @RequestBody PurchaseItemDto dto) {
         service.getPurchaseItem(dto.getId());
         service.editPurchaseItem(dto);
     }

@@ -1,85 +1,11 @@
 {
 	"info": {
-		"_postman_id": "f3680618-5505-4f74-8fe6-9fe8e13ca16a",
+		"_postman_id": "7f5ba5da-719a-4ccb-9281-4fc7b7f674a9",
 		"name": "homeaccountance",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2894879"
 	},
 	"item": [
-		{
-			"name": "users",
-			"item": [
-				{
-					"name": "save user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Andrii\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "localhost:8080/user"
-					},
-					"response": []
-				},
-				{
-					"name": "get users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "localhost:8080/users"
-					},
-					"response": []
-				},
-				{
-					"name": "get user",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/user/:userId",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"user",
-								":userId"
-							],
-							"variable": [
-								{
-									"key": "userId",
-									"value": "99b3f9b5-316f-41bc-8608-736e3fd8fd06"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "edit user",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"99b3f9b5-316f-41bc-8608-736e3fd8fd06\",\r\n    \"name\": \"New Andrii\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "localhost:8080/user"
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "purchases",
 			"item": [
@@ -128,7 +54,17 @@
 								}
 							}
 						},
-						"url": "localhost:8080/homeaccountance/purchases"
+						"url": {
+							"raw": "localhost:8080/homeaccountance/purchases",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"homeaccountance",
+								"purchases"
+							]
+						}
 					},
 					"response": []
 				},
@@ -172,7 +108,17 @@
 								}
 							}
 						},
-						"url": "localhost:8080/homeaccountance/purchases"
+						"url": {
+							"raw": "localhost:8080/homeaccountance/purchases",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"homeaccountance",
+								"purchases"
+							]
+						}
 					},
 					"response": []
 				},
@@ -180,7 +126,10 @@
 					"name": "get purchaseByID",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				}
